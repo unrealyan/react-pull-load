@@ -1,34 +1,61 @@
 {
-  "name": "react-pull-load",
-  "version": "0.1.0",
-  "private": true,
+  "name": "@amegroups/react-pull-load",
+  "version": "1.1.12",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "NODE_ENV=dev webpack-dev-server --content-base --inline --config webpack.config.dev.js",
+    "build:test": "webpack --config webpack.config.dev.js  --mode=production --progress",
+    "build": "NODE_ENV=poduction webpack --config webpack.config.js  --mode=production --progress"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@code.aliyun.com:ame-fe-npm/react-pull-load.git"
+  },
+  "keywords": [
+    "hey@amegroups.com"
+  ],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.9.0",
+    "@babel/plugin-proposal-class-properties": "^7.8.3",
+    "@babel/plugin-transform-runtime": "^7.9.0",
+    "@babel/preset-env": "^7.9.0",
+    "@babel/preset-react": "^7.9.4",
+    "@types/node": "^12.12.31",
+    "autoprefixer": "^9.7.5",
+    "babel-loader": "^8.1.0",
+    "babel-preset-stage-0": "^6.24.1",
+    "css-loader": "^3.4.2",
+    "file-loader": "^6.0.0",
+    "html-loader": "^1.0.0",
+    "html-webpack-plugin": "^4.0.1",
+    "less": "^3.11.1",
+    "less-loader": "^5.0.0",
+    "mini-css-extract-plugin": "^0.9.0",
+    "node-sass": "^4.13.1",
+    "postcss": "^7.0.27",
+    "postcss-loader": "^3.0.0",
+    "sass": "^1.26.3",
+    "sass-loader": "^8.0.2",
+    "style-loader": "^1.1.3",
+    "ts-loader": "^6.2.2",
+    "typescript": "^3.8.3",
+    "url-loader": "^4.0.0",
+    "webpack": "^4.42.1",
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.10.3"
+  },
   "dependencies": {
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.5.0",
-    "@testing-library/user-event": "^7.2.1",
+    "copy-webpack-plugin": "^5.1.1",
+    "crypto-js": "^4.0.0",
+    "dotenv": "^8.2.0",
+    "node-fetch": "^2.6.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-scripts": "3.4.3"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+    "request": "^2.88.2",
+    "weixin-js-sdk": "^1.6.0"
   }
 }

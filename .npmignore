@@ -1,0 +1,12 @@
+.idea/
+src/
+node_modules/
+.babelrc
+webpack.config.dev.js
+webpack.config.js
+postcss.config.js
+*.html
+*.json
+*.md
+*.ts
+*.config.js
