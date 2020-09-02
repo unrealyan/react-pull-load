@@ -5,8 +5,8 @@ let pullLoad;
 let last_known_scroll_position = 0;
 let last_known_scroll_time = 0;
 let duration = 200;
+let loading = true;
 
-const isBrowser = () => typeof window !== "undefined";
 if (typeof window === 'undefined') {
     // @ts-ignore
     global.window = {}
@@ -14,43 +14,56 @@ if (typeof window === 'undefined') {
 
 const ReactPullLoad = (props) => {
 
-    const loadingBar = useRef<HTMLParagraphElement>(null);
+    const loadingBar = useRef<HTMLDivElement>(null);
+    const loadingContainer = useRef<HTMLDivElement>(null);
 
     const {LoadingComponent} = props;
 
     useEffect(() => {
-        // console.log(isBrowser())
         if (loadingBar.current && !pullLoad) {
             pullLoad = window.addEventListener("scroll", onScroll)
         }
         return () => window.removeEventListener("scroll", onScroll)
     });
 
-    useEffect(()=>{
-        let bar = loadingBar.current.getBoundingClientRect();
-        if (loadingBar.current && bar.top < document.documentElement.clientHeight){
-            props.callback()
+    useEffect(() => {
+        if (loadingBar.current) {
+            let bar = loadingBar.current.getBoundingClientRect();
+            if (
+                loadingBar.current &&
+                bar.top < document.documentElement.clientHeight &&
+                !loading
+            ) {
+                loading = true
+                props.callback()
+            }
+        }
+        return () => {
+            loading = false
         }
     })
 
-    const onScroll = () => {
+    const onScroll = async () => {
         let bar = loadingBar.current.getBoundingClientRect();
         if (loadingBar.current &&
             (last_known_scroll_position < window.scrollY) &&
             ((new Date().getTime() - last_known_scroll_time) > duration) &&
-            (bar.top < document.documentElement.clientHeight)
+            (bar.top < document.documentElement.clientHeight) &&
+            !loading
         ) {
             last_known_scroll_time = new Date().getTime();
-            props.callback()
+            loading = true
+            await props.callback()
+            loading = false
         }
         last_known_scroll_position = window.scrollY;
     };
 
 
-    return <div className="container">
+    return <div className="container" ref={loadingContainer}>
         {props.children}
         {
-            props.over ? <p id="over" style={{textAlign: "center"}}>{props.over}</p> : (
+            props.over ? <div id="over" style={{textAlign: "center"}}>{props.over}</div> : (
                 <div id="loading" ref={loadingBar}>
                     {
                         LoadingComponent ? LoadingComponent : <svg xmlns="http://www.w3.org/2000/svg"

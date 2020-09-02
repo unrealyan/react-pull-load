@@ -33,14 +33,18 @@ function Main() {
     // },[list.length])
 
     const fetchData = () => {
-        setTimeout(()=>{
-            let data = makeData();
-            let arr = list.concat(data);
-            setList(arr)
-            if (arr.length>39){
-                setOver("over")
-            }
-        },2000)
+        console.log('get data')
+        return new Promise((res,rej)=>{
+            setTimeout(()=>{
+                let data = makeData();
+                let arr = list.concat(data);
+                setList(arr)
+                if (arr.length>39){
+                    setOver("over")
+                }
+                res()
+            },2000)
+        })
     };
 
     console.log(list)
